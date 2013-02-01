@@ -20,6 +20,11 @@
     http_port: 80
     max_clients: 200
   
+  vars_prompt:
+    - name: m_password
+      prompt: "Mysql Root Password"
+      private: yes
+
 
   # define the tasks that are part of this play...
 
@@ -37,8 +42,6 @@
 #    notify:
 #    - restart apache
 
-  - name: Copy Auth Key
-    action: authorized_key user=teknix key='$FILE(/home/teknix/.ssh/id_rsa.pub)'
 
   - name: Install Base Package named $item 
     action: apt pkg=$item state=latest
@@ -47,10 +50,11 @@
         - git-core
         - zip
         - facter
-        - libjson-ruby
+        - ruby-json
         - rsync
         - logwatch
         - checksecurity
         - fail2ban
   - name: Update Hosts file
     action: template src=templates/etc_hosts.j2 dest=/etc/hosts
+  - include: tasks/apache_php.yml
