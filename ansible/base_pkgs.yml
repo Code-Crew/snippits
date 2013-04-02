@@ -37,6 +37,8 @@
 #    notify:
 #    - restart apache
 
+  - name: Copy Auth Key
+    action: authorized_key user=teknix key='$FILE(/home/teknix/.ssh/id_rsa.pub)'
 
   - name: Install Base Package named $item 
     action: apt pkg=$item state=latest
