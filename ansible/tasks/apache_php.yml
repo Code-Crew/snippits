@@ -1,0 +1,34 @@
+    - name: Installing Apache
+      action: apt pkg=$item state=latest
+      with_items:
+          - apache2
+          - apache2.2-common 
+          - apache2-doc 
+          - apache2-mpm-prefork 
+          - apache2-utils 
+          - libexpat1 
+          - ssl-cert 
+          - libapache2-mod-php5 
+          - php5 
+          - php5-common 
+          - php5-gd 
+          - php5-mysql 
+          - php5-imap 
+          - php5-cli 
+          - php5-cgi 
+          - libapache2-mod-fcgid 
+          - apache2-suexec 
+          - php-pear 
+          - php-auth 
+          - php5-curl 
+          - php5-mcrypt 
+          - mcrypt 
+          - php5-imagick 
+          - imagemagick 
+          - libapache2-mod-suphp 
+          - mysql-server
+          - mysql-client
+          - python-mysqldb
+
+    - name: Setting Mysql Root Password
+      action: mysql_user name=root password=$m_password host=localhost
